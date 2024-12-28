@@ -1,9 +1,7 @@
 {
-  "name": "flyee",
+  "name": "deep-ai",
   "version": "0.0.1",
-  "description": "flyee",
   "type": "module",
-  "author": "chengzhou",
   "main": "dist-electron/main/index.js",
   "engines": {
     "node": ">=16.14"
@@ -25,7 +23,6 @@
     "bump:minor": "changelogen --bump --output CHANGELOG.md --release --minor",
     "bump:major": "changelogen --bump --output CHANGELOG.md --release --major",
     "dir-tree": "esno ./scripts/dir-tree",
-    "gen:uno": "esno ./scripts/gen-unocss",
     "lint-staged": "lint-staged",
     "prepare": "husky install"
   },
