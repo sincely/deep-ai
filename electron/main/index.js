@@ -58,7 +58,9 @@ async function createWindow() {
     frame: true, // 隐藏窗口边框
     mediaAccess: true, // 允许访问媒体设备
     webPreferences: {
-      preload
+      preload,
+      // 解决 Not allowed to load local resource
+      webSecurity: false
       // sandbox: false
       // contextIsolation: false,
       // webSecurity: false

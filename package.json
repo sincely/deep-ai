@@ -6,13 +6,15 @@
   "engines": {
     "node": ">=16.14"
   },
+  "description": "ai-chat",
+  "author": "chengzhou",
   "scripts": {
     "dev": "vite",
     "serve": "vite --mode development",
     "electron:build": "vite build && electron-builder",
     "electron:postinstall": "electron-builder install-app-deps",
-    "build:win": "vite build && electron-builder --win",
-    "build:mac": "vite build && electron-builder --mac",
+    "build:win": "electron-builder --win",
+    "build:mac": "electron-builder --mac",
     "build:test": "vite build --mode test",
     "build:production": "vite build --mode production",
     "preview": "vite preview --port 4173",
@@ -46,11 +48,9 @@
     "unplugin-icons": "0.16.1",
     "unplugin-vue-components": "0.25.2",
     "vite-plugin-html": "3.2.2",
-    "vite-plugin-inspect": "0.7.42",
     "vite-plugin-svg-icons": "2.0.1",
     "vite-svg-loader": "4.0.0",
     "vite-plugin-style-import": "2.0.0",
-    "vite-plugin-restart": "0.4.0",
     "vue": "3.4.31",
     "vue-router": "4.5.0"
   },
@@ -90,6 +90,8 @@
     "vite": "5.4.11",
     "electron": "28.3.3",
     "electron-builder": "24.13.3",
+    "vite-plugin-restart": "0.4.0",
+    "vite-plugin-inspect": "0.7.42",
     "vite-plugin-vue-devtools": "7.3.5",
     "vite-plugin-electron": "0.28.8",
     "vite-plugin-electron-renderer": "0.14.6",
