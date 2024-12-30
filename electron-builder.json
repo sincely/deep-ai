@@ -1,8 +1,7 @@
 {
-  "$schema": "https://raw.githubusercontent.com/electron-userland/electron-builder/master/packages/app-builder-lib/scheme.json",
   "appId": "ichengzhou@icloud.com",
   "asar": true,
-  "productName": "flyee",
+  "productName": "deep-ai",
   "copyright": "dyy.dongyuanwai © 2024",
   "directories": {
     "output": "release/${version}"
@@ -12,6 +11,12 @@
     "target": ["dmg"],
     "artifactName": "${productName}-Mac-${version}-Installer.${ext}"
   },
+  "publish": [
+    {
+      "provider": "generic",
+      "url": "http://localhost:9000"
+    }
+  ],
   "win": {
     "target": [
       {

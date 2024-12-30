@@ -3,6 +3,7 @@ import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 import os from 'node:os'
 import icon from '../../resources/icon.png?asset'
+import checkUpdate from '../../src/utils/checkUpdate'
 const login_width = 530
 const register_height = 635
 // 屏蔽浏览器控制台警告
@@ -117,6 +118,7 @@ async function createWindow() {
   // Test actively push message to the Electron-Renderer
   win.webContents.on('did-finish-load', () => {
     win?.webContents.send('main-process-message', new Date().toLocaleString())
+    checkUpdate(win)
   })
 
   // Make all links open with the browser, not with the application
