@@ -65,7 +65,8 @@ export default defineConfig(({ mode, command }) => {
         '@/views': resolve(__dirname, 'src/views'),
         '@/components': resolve(__dirname, 'src/components'),
         '@/utils': resolve(__dirname, 'src/utils'),
-        '@/assets': resolve(__dirname, 'src/assets')
+        '@/assets': resolve(__dirname, 'src/assets'),
+        '@/icons': resolve(__dirname, 'src/icons')
       },
       // 导入时想要省略的扩展名列表
       // 不建议使用.vue 影响IDE和类型支持

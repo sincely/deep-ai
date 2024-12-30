@@ -1,13 +1,13 @@
-import { app, BrowserWindow, shell, ipcMain } from 'electron'
-// import { createRequire } from 'node:module'
+import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { fileURLToPath } from 'node:url'
 import path from 'node:path'
 import os from 'node:os'
-
+import icon from '../../resources/icon.png?asset'
+const login_width = 530
+const register_height = 635
 // 屏蔽浏览器控制台警告
-process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true'
 
-// const require = createRequire(import.meta.url)
+process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = 'true'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // The built directory structure
@@ -46,14 +46,21 @@ const indexHtml = path.join(RENDERER_DIST, 'index.html')
 
 async function createWindow() {
   win = new BrowserWindow({
-    width: 800,
-    height: 550,
-    minWidth: 800,
-    minHeight: 550,
-    title: 'Main window',
-    icon: path.join(process.env.VITE_PUBLIC, 'favicon.ico'),
+    icon: icon,
+    width: login_width,
+    height: register_height,
+    show: false, // 隐藏窗口
+    transparent: true, // 透明窗口
+    autoHideMenuBar: true, // 隐藏菜单栏
+    titleBarStyle: 'hidden', // 隐藏标题栏
+    resizable: false, // 禁止调整窗口大小
+    frame: true, // 隐藏窗口边框
+    mediaAccess: true, // 允许访问媒体设备
     webPreferences: {
       preload
+      // sandbox: false
+      // contextIsolation: false,
+      // webSecurity: false
       // 警告:在生产环境中启用nodeIntegration并禁用contextIsolation是不安全的
       // 考虑使用contextBridge.exposeInMainWorld
       // 阅读更多 https://www.electronjs.org/docs/latest/tutorial/context-isolation
@@ -62,6 +69,41 @@ async function createWindow() {
     }
   })
 
+  ipcMain.on('toMain', (event, args) => {
+    win.setResizable(true)
+    win.setSize((args.screenWidth / 5) * 3 + 150, 600)
+    win.setMinimumSize((args.screenWidth / 5) * 3 + 150, 600)
+    win.center()
+    win.setMaximizable(true)
+    win.setMaximumSize((args.screenWidth / 5) * 3 + 200, 700)
+  })
+
+  ipcMain.on('minimizing', (event, args) => {
+    event.preventDefault() // 阻止默认最小化行为
+    win.minimize() // 最小化到任务栏
+  })
+
+  ipcMain.on('expandWindow', (event, args) => {
+    const defaultSize = mainWindow.getSize()
+    const maxSize = mainWindow.getMaximumSize()
+    if (defaultSize[0] === (args.screenWidth / 5) * 3 + 150 && defaultSize[1] === 600) {
+      win.setResizable(true)
+      win.setSize((args.screenWidth / 5) * 3 + 200, 700)
+    } else if (maxSize[0] === (args.screenWidth / 5) * 3 + 200 && maxSize[1] === 700) {
+      win.setResizable(true)
+      win.setSize((args.screenWidth / 5) * 3 + 150, 600)
+    }
+  })
+
+  win.on('ready-to-show', () => {
+    win.show()
+  })
+
+  win.webContents.setWindowOpenHandler((details) => {
+    shell.openExternal(details.url)
+    return { action: 'deny' }
+  })
+  // 如果是开发环境，加载Vite开发服务器
   if (VITE_DEV_SERVER_URL) {
     // #298
     win.loadURL(VITE_DEV_SERVER_URL)
@@ -85,11 +127,24 @@ async function createWindow() {
   // win.webContents.on('will-navigate', (event, url) => { }) #344
 }
 
-app.whenReady().then(createWindow)
+app.whenReady().then(() => {
+  createWindow()
+
+  app.on('activate', function () {
+    const allWindows = BrowserWindow.getAllWindows()
+    if (allWindows.length) {
+      allWindows[0].focus()
+    } else {
+      createWindow()
+    }
+  })
+})
 
 app.on('window-all-closed', () => {
   win = null
-  if (process.platform !== 'darwin') app.quit()
+  if (process.platform !== 'darwin') {
+    app.quit()
+  }
 })
 
 app.on('second-instance', () => {
@@ -97,15 +152,6 @@ app.on('second-instance', () => {
     // Focus on the main window if the user tried to open another
     if (win.isMinimized()) win.restore()
     win.focus()
-  }
-})
-
-app.on('activate', () => {
-  const allWindows = BrowserWindow.getAllWindows()
-  if (allWindows.length) {
-    allWindows[0].focus()
-  } else {
-    createWindow()
   }
 })
 

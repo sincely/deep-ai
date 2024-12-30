@@ -1,21 +1,31 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import layouts from '@/layouts/index.vue'
-import home from '@/views/home/index.vue'
 
 const router = createRouter({
+  mode: 'hash',
   history: createWebHashHistory(),
   routes: [
     {
       path: '/',
-      component: layouts,
-      redirect: '/home',
+      name: 'login',
+      redirect: '/login'
+    },
+    {
+      path: '/login',
+      name: '登录',
+      component: () => import('@/views/login/index.vue')
+    },
+    {
+      path: '/main',
+      redirect: '/desktop',
+      name: 'main',
+      component: () => import('@/layouts/index.vue'),
       children: [
         {
-          path: '/home',
-          component: home,
-          name: 'home',
+          path: '/desktop',
+          component: () => import('@/views/home/index.vue'),
+          name: 'desktop',
           meta: {
-            title: '首页',
+            title: '主页',
             keepAlive: true
           }
         }

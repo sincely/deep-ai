@@ -24,12 +24,12 @@ const props = defineProps({
   // svg的图标的宽度
   width: {
     type: String,
-    default: '24px'
+    default: '20px'
   },
   // svg的图标的高度
   height: {
     type: String,
-    default: '24px'
+    default: '20px'
   }
 })
 

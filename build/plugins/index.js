@@ -2,8 +2,6 @@ import vue from '@vitejs/plugin-vue'
 import unplugin from './unplugin' // unplugin自动导入
 import inspect from './inspect' // vue插件检查页面
 import legacy from './legacy' // 浏览器兼容
-import vueDevTools from './vueDevtool' // vue开发工具
-import restartPlugin from './restart' // 重启服务
 import htmlPlugin from './html' // html插件
 import svgIconPlugin from './svgIcon' // svg图标集成
 /**
@@ -12,11 +10,11 @@ import svgIconPlugin from './svgIcon' // svg图标集成
  * @param isBuild - 是否编译
  */
 export default function createVitePlugins(viteEnv, isBuild = false) {
-  const vitePlugins = [vue(), ...unplugin(), restartPlugin(), svgIconPlugin()]
+  const vitePlugins = [vue(), ...unplugin(), svgIconPlugin()]
   if (isBuild) {
     vitePlugins.push(legacy(), htmlPlugin())
   } else {
-    vitePlugins.push(inspect(), vueDevTools(viteEnv))
+    vitePlugins.push(inspect())
   }
   return vitePlugins
 }
