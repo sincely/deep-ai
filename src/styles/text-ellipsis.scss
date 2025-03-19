@@ -10,8 +10,7 @@
   display: -webkit-box;
   overflow: hidden;
   text-overflow: ellipsis;
-  -webkit-line-clamp: 2; // 这个值可以随便设置，比如这里的2就是最多显示两行，两行后出现省略号
-  -webkit-box-orient: vertical;
+  line-clamp: 2; // 这个值可以随便设置，比如这里的2就是最多显示两行，两行后出现省略号
 }
 
 // 文字或者数字一行显示换行处理

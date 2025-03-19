@@ -4,6 +4,6 @@ export default {
   '*.js': ['prettier --write', 'eslint --fix'],
   '*.vue': ['prettier --write', 'eslint --fix', 'stylelint --fix --allow-empty-input'],
   'package.json': ['prettier --write'],
-  '*.{html,css,less}': ['prettier --write', 'stylelint --fix --allow-empty-input'],
+  '*.{html,css,scss}': ['prettier --write', 'stylelint --fix --allow-empty-input'],
   '{!(package)*.json,.!(browserslist)*rc}': ['prettier --write--parser json']
 }

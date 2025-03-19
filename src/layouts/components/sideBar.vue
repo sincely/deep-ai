@@ -59,7 +59,7 @@ const handleOperation = (item) => {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .sidebar {
   display: flex;
   flex-direction: column;

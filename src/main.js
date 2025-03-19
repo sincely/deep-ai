@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import App from '@/App.vue'
 import store from '@/store'
 import router from '@/router' // 路由
-import '@/styles/index.less' // 全局样式
+import '@/styles/index.scss' // 全局样式
 import { setupIcon } from './plugins' // 全局注册antd图标
 import ElementPlus, { ElMessage } from 'element-plus'
 import 'element-plus/dist/index.css'

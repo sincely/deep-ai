@@ -1,5 +1,6 @@
-@import './scroll.less'; // 全局滚动条样式
-@import './text-ellipsis.less'; // 文字溢出样式
+@import './text-ellipsis'; // 文字溢出样式
+@import './scroll'; // 通用样式
+@import './transition'; // 动画样式
 * {
   padding: 0;
   margin: 0;
