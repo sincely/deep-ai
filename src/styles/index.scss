@@ -1,6 +1,6 @@
-@import './text-ellipsis'; // 文字溢出样式
-@import './scroll'; // 通用样式
-@import './transition'; // 动画样式
+@use './text-ellipsis'; // 文字溢出样式
+@use './scroll'; // 通用样式
+@use './transition'; // 动画样式
 * {
   padding: 0;
   margin: 0;

@@ -31,7 +31,8 @@ export default {
           'if',
           'each',
           'include',
-          'mixin'
+          'mixin',
+          'use'
         ]
       }
     ],
